@@ -1,3 +1,4 @@
+%20200902, added path to params
 %20200825, run params to get:
 %project_folder_name
 %id_type
@@ -7,7 +8,7 @@
 %20180712
 function create_job_related_files
 
-params; %get project_folder_name and id_type
+
 
 current_path = [fileparts(which('create_job_related_files.m')) filesep];
 file_separators = find(current_path == filesep);
@@ -15,11 +16,14 @@ n_file_separators = length(file_separators);
 path_project = current_path(1:file_separators(n_file_separators-2));
 %path_scripts = current_path(1:file_separators(n_file_separators-1));
 path_data = [path_project 'data' filesep 'raw' filesep];
+path_params = [path_project 'data' filesep];
 path_results = [path_project 'data' filesep 'result' filesep];
 path_jobs = [path_project 'jobs' filesep];
 if exist(path_jobs,'dir')~=7
     mkdir(path_jobs);
 end
+addpath(path_params);
+params; %get project_folder_name and id_type
 
 id_list = make_id_list(path_data,path_results, id_type);
 fprintf('%d id found\n',length(id_list));
